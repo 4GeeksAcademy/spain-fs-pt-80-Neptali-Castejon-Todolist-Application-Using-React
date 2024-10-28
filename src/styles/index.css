@@ -10,3 +10,70 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+/* Contenedor Principal */
+.todo-app__container {
+    width: 600px;
+}
+
+/* Elemento Lista */
+.todo-app__li {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Input de Tarea */
+.todo-app__input {
+    height: 70px;
+    border: none;
+    border-radius: 0;
+    font-weight: lighter;
+    color: rgb(227, 227, 227);
+    box-shadow: none;
+}
+
+.todo-app__input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Contenedor del Input */
+.todo-app__input-container {
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+}
+
+/* Título Principal */
+.todo-app__title {
+    font-size: 100px;
+    font-weight: lighter;
+    margin-bottom: 1rem;
+    color: rgb(227, 227, 227);
+}
+
+/* Ítem de Lista */
+.todo-app__item {
+    border: 1px solid #e0e0e0;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Texto de Elementos Restantes */
+.todo-app__remaining {
+    font-weight: lighter;
+    color: rgb(177, 177, 177);
+}
+
+/* Sombra para el Contenedor */
+.shadow {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón de Borrado */
+.todo-app__delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+}
