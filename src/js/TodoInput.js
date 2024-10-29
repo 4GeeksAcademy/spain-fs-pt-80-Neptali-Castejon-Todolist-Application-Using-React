@@ -1,15 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const TodoInput = () => {
+    const [inputValue, setInputValue] = useState('');
+    const [todos, setTodos] = useState([]);
+    const [visibleIcons, setVisibleIcons] = useState({});
+
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (inputValue.trim()) {
+            setTodos((prev) => [...prev, inputValue]);
+            setInputValue(''); // Limpiar input después de agregar
+        }
+    };
+
+    const handleClick = (index) => {
+        setTodos(todos.filter((_, i) => i !== index));
+    };
+
+    const handleMouseEnter = (index) => {
+        setVisibleIcons((prev) => ({ ...prev, [index]: true })); // Mostrar ícono
+    };
+
+    const handleMouseLeave = (index) => {
+        setVisibleIcons((prev) => ({ ...prev, [index]: false })); // Ocultar ícono
+    };
+
     return (
-        <li className="todo-app__li d-flex align-items-center ps-5">
-            <input
-                className="todo-app__input form-control fs-2"
-                placeholder="What needs to be done?"
-            />
-            <button className="todo-app__delete-btn p-0">
-                <i className="fa-solid fa-xmark pe-3 fs-3 text-danger"></i>
-            </button>
-        </li>
+        <div className="todo-app__content shadow p-0">
+            <form onSubmit={handleSubmit} className="todo-app__form">
+                <input
+                    type="text"
+                    onChange={handleInputChange}
+                    value={inputValue}
+                    className="todo-app__input form-control ps-5"
+                    placeholder="What needs to be done?"
+                    aria-label="New task input"
+                />
+            </form>
+            <ul className="todo-app__list d-flex flex-column p-0 m-0 w-100">
+                {todos.map((element, index) => (
+                    <li
+                        key={index}
+                        className="todo-app__item  d-flex align-items-center justify-content-between ps-5 pe-4"
+                        onMouseEnter={() => handleMouseEnter(index)}
+                        onMouseLeave={() => handleMouseLeave(index)}
+                    >
+                        {element}
+                        {visibleIcons[index] && ( // Renderiza el botón solo si es visible
+                            <button
+                                    onClick={() => handleClick(index)}
+                                    type="button"
+                                    className="todo-app__delete-btn"
+                                    aria-label="Delete task"
+                                >
+                                <i className="todo-app__delete-icon fa-solid fa-xmark fs-4"></i>
+                            </button>
+                        )}
+                    </li>
+                ))}
+                <footer className="todo-app__footer d-flex align-items-center justify-content-between px-4">
+                    <p className="todo-app__remaining text-start">{todos.length} items left</p>
+                    {todos.length > 1 && ( 
+                        <button
+                            onClick={() => setTodos([])}
+                            type="button"
+                            className="todo-app__clear-btn d-flex align-items-center p-0"
+                            aria-label="Clear all tasks"
+                        >
+                            <p className="todo-app__remaining todo-app__clear-icon pe-2">Delete All</p>
+                            <i className="todo-app__clear-icon fs-5 fa-regular fa-trash-can"></i>
+                        </button>
+                    )}
+                </footer>
+            </ul>
+        </div>
     );
 };
