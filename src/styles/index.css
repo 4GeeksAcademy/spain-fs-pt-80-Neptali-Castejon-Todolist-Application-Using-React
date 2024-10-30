@@ -6,6 +6,9 @@
     --font-size-regular: 1.5rem;
     --font-size-large: 5rem;
     --padding-small: 0.625rem;
+    --bs-link-hover-color-rgb: 255, 0, 0; /* Define el color hover deseado, por ejemplo rojo */
+    --bs-link-color-rgb: 0, 0, 255; /* Define el color por defecto deseado, por ejemplo azul */
+    --bs-link-opacity: 1; /* Define la opacidad deseada */
 }
 
 /* Contenedor Principal */
@@ -17,7 +20,6 @@
 /* Contenido Principal */
 .todo-app__content {
     border: 1px solid var(--color-light-gray);
-    padding: 1rem;
 }
 
 /* Título Principal */
@@ -67,7 +69,6 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    display: inline-flex;
     align-items: center;
     padding: 0;
 }
@@ -103,14 +104,6 @@
     color: var(--color-red);
 }
 
-/* Sombra para el Contenedor */
-.shadow {
-    box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-
-
-
 /* Formulario de Entrada */
 .todo-app__form {
     height: 60px;
@@ -119,4 +112,24 @@
     align-items: center;
 }
 
+/* Estilos básicos para el ícono */
+.icon-link {
+    display: inline-flex;
+    gap: .375rem; /* Espacio entre el ícono y el texto */
+    align-items: center;
+    color: var(--color-red);
+    -webkit-text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 0.5));
+    text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 0.5));
+    text-underline-offset: 0.25em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Suavizar cambios de color */
+}
 
+/* Estilos en hover */
+.icon-link-hover:hover {
+    --bs-link-color-rgb: var(--bs-link-hover-color-rgb); /* Cambiar color en hover */
+    -webkit-text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 0.5));
+    text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 0.5));
+}

@@ -46,22 +46,21 @@ export const TodoInput = () => {
                 {todos.map((element, index) => (
                     <li
                         key={index}
-                        className="todo-app__item  d-flex align-items-center justify-content-between ps-5 pe-4"
+                        className="todo-app__item d-flex align-items-center justify-content-between ps-5 pe-4"
                         onMouseEnter={() => handleMouseEnter(index)}
                         onMouseLeave={() => handleMouseLeave(index)}
                         title="Task item"
                     >
                         {element}
-                        {visibleIcons[index] && ( // Renderiza el botón solo si es visible
-                            <button
-                                onClick={() => handleClick(index)}
-                                type="button"
+                        {visibleIcons[index] && (
+                            <a 
                                 className="todo-app__delete-btn"
+                                onClick={() => handleClick(index)}
                                 aria-label="Delete task"
                                 title="Delete this task"
                             >
                                 <i className="todo-app__delete-icon fa-solid fa-xmark fs-4"></i>
-                            </button>
+                            </a>
                         )}
                     </li>
                 ))}
@@ -73,16 +72,15 @@ export const TodoInput = () => {
                 >
                     {todos.length} items left
                 </p>
-                {todos.length > 1 && ( // Renderiza el botón solo si se cumple la condición
-                    <button
+                {todos.length > 1 && (
+                    <button 
+                        className="todo-app__clear-btn icon-link icon-link-hover p-0"
                         onClick={() => setTodos([])}
-                        type="button"
-                        className="todo-app__clear-btn d-flex align-items-center p-0"
                         aria-label="Clear all tasks"
                         title="Delete all tasks"
                     >
-                        <p className="todo-app__remaining todo-app__clear-icon pe-2">Delete All</p>
-                        <i className="todo-app__clear-icon fs-5 fa-regular fa-trash-can"></i>
+                        <p className="todo-app__remaining todo-app__clear-icon">Delete All</p>
+                        <i className="bi fs-5 fa-regular fa-trash-can" aria-hidden="true"></i>
                     </button>
                 )}
             </footer>
