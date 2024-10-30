@@ -14,7 +14,7 @@ export const TodoInput = () => {
         if (inputValue.trim()) {
             setTodos((prev) => [...prev, inputValue]);
             setInputValue(''); // Limpiar input después de agregar
-        }
+        }    
     };
 
     const handleClick = (index) => {
