@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import TodoHeader from "./TodoHeader";
 import TodoFooter from "./TodoFooter";
+import TodoList from "./TodoList";
+import TodoInput from "./TodoInput";
 
 const Home = () => {
      // Estados para almacenar las tareas
@@ -26,14 +28,6 @@ const Home = () => {
     const handleClick = (index) => {
         setTodos(todos.filter((_, i) => i !== index));
     };
-
-    const handleMouseEnter = (index) => {
-        setVisibleIcons((prev) => ({ ...prev, [index]: true })); // Mostrar ícono
-    };
-
-    const handleMouseLeave = (index) => {
-        setVisibleIcons((prev) => ({ ...prev, [index]: false })); // Ocultar ícono
-    };
     
     return (        
         <main className="container"> 
@@ -46,42 +40,20 @@ const Home = () => {
                     <div className="todo-app__content shadow p-0">
 
                         {/* Componente para ingresar nuevas tareas */}
-                        <form onSubmit={handleSubmit} className="todo-app__form">
-                            <input
-                                type="text"
-                                onChange={handleInputChange}
-                                value={inputValue}
-                                className="todo-app__input form-control ps-5"
-                                placeholder="What needs to be done?"
-                                aria-label="New task input"
-                                title="Type a new task and press Enter to add it"
-                            />
-                        </form>
+                        <TodoInput 
+                            inputValue={inputValue}
+                            handleInputChange={handleInputChange}
+                            handleSubmit={handleSubmit}
+                        />
 
                         {/* Componente para mostrar la lista de tareas */}
-                        <ul className="todo-app__list d-flex flex-column p-0 m-0 w-100">
-                            {todos.map((element, index) => (
-                                <li
-                                    key={index}
-                                    className="todo-app__item d-flex align-items-center justify-content-between ps-5 pe-4"
-                                    onMouseEnter={() => handleMouseEnter(index)}
-                                    onMouseLeave={() => handleMouseLeave(index)}
-                                    title="Task item"
-                                >
-                                    {element}
-                                    {visibleIcons[index] && (
-                                        <a 
-                                            className="todo-app__delete-btn"
-                                            onClick={() => handleClick(index)}
-                                            aria-label="Delete task"
-                                            title="Delete this task"
-                                        >
-                                            <i className="todo-app__delete-icon fa-solid fa-xmark fs-4"></i>
-                                        </a>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
+                        <TodoList 
+                            todos={todos}
+                            visibleIcons={visibleIcons}
+                            onDelete={handleClick}
+                            handleMouseEnter={(index) => setVisibleIcons((prev) => ({ ...prev, [index]: true }))}
+                            handleMouseLeave={(index) => setVisibleIcons((prev) => ({ ...prev, [index]: false }))}
+                        />
 
                         {/* Componente para el footer*/}
                         <TodoFooter todos={todos} onClear={() => setTodos([])} />
